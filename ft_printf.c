@@ -42,6 +42,7 @@ int	ft_printf(const char *input, ...)
 {
 	t_print	*tab;
 	int		i;
+	int		len;
 
 	tab = malloc(sizeof(t_print));
 	if (!tab)
@@ -63,6 +64,8 @@ int	ft_printf(const char *input, ...)
 		}
 		i++;
 	}
+	va_end(tab->args);
+	len = tab->len;
 	free(tab);
-	return (tab->len);
+	return (len);
 }
