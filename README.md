@@ -62,22 +62,43 @@
 </header>
 
 
-A custom implementation of the C standard library's `printf` function. This project is part of the 42 school curriculum and aims to replicate the original `printf` behavior, including handling various format specifiers, flags, and arguments.
+A custom implementation of the C standard library's `printf` function. This project is part of the 42 school curriculum and recodes the original `printf` behavior, providing a lightweight and portable way to format and print data.
 
 ## Features
 
--   **Handles standard format specifiers**: `c`, `s`, `p`, `d`, `i`, `u`, `x`, `X`, and `%%`.
--   **Implements bonus flags**: `-` (left-justify), `0` (zero-padding), `.` (precision), and `#` (alternate form for `x`/`X`).
--   **Supports field width**: Controls the minimum number of characters printed, including dynamic width using `*`.
+This implementation of `ft_printf` supports the following format specifiers, flags, and features:
+
+#### Conversion Specifiers
+
+| Specifier | Output |
+| :---: | --- |
+| `%c` | A single character. |
+| `%s` | A string of characters. |
+| `%p` | The memory address of a pointer, in hexadecimal format. |
+| `%d` | A signed decimal integer. |
+| `%i` | A signed decimal integer. |
+| `%u` | An unsigned decimal integer. |
+| `%x` | An unsigned hexadecimal integer (lowercase). |
+| `%X` | An unsigned hexadecimal integer (uppercase). |
+| `%%` | A literal percent sign (`%`). |
+
+#### Flags and Modifiers
+
+-   **`-`**: Left-justify the output within the field width.
+-   **`0`**: Zero-pad the output instead of using spaces.
+-   **`.`**: Specifies precision for strings and integers.
+-   **`#`**: Alternate form; prepends `0x` or `0X` for hexadecimal conversions.
+-   **Width**: Specifies a minimum field width for the output.
+-   **`*`**: Use the next argument as the field width.
 
 ## Getting Started
 
 ### Prerequisites
 
 -   A C compiler (e.g., `gcc` or `clang`)
--   `make` utility
+-   `make` build automation tool
 
-### Installation & Compilation
+### Building the Library
 
 1.  **Clone the repository:**
     ```sh
@@ -85,22 +106,22 @@ A custom implementation of the C standard library's `printf` function. This proj
     cd ft-printf
     ```
 
-2.  **Compile the library:**
-    Run `make` to compile the source files and create the static library `libftprintf.a`.
+2.  **Compile the source files:**
+    Run `make` to compile the project and create the static library `libftprintf.a`.
     ```sh
     make
     ```
 
 ## Usage
 
-To use `ft_printf` in your own project:
+To use `ft_printf` in your C project, include the header and link against the compiled library.
 
-1.  Include the header file `ft_printf.h` in your C source files.
-2.  Compile your project and link it with the `libftprintf.a` library.
+1.  Include the header file in your source code: `#include "ft_printf.h"`.
+2.  Compile your project, linking the `libftprintf.a` library.
 
 ### Example
 
-Here is a simple `main.c` file demonstrating the function's usage:
+Here is a simple `main.c` demonstrating the function's usage:
 
 ```c
 #include "includes/ft_printf.h"
@@ -124,15 +145,19 @@ int main(void)
 }
 ```
 
-**Compile and run the example:**
+#### Compiling and Running
+
+First, ensure `libftprintf.a` has been created by running `make`. Then, compile your `main.c` with the library:
 
 ```sh
-# First, ensure libftprintf.a has been created with `make`
-gcc main.c libftprintf.a -o example
+# Compile the main program and link the library
+gcc main.c -L. -lftprintf -Iincludes -o example
+
+# Run the executable
 ./example
 ```
 
-**Expected Output:**
+#### Expected Output
 
 ```
 --- Testing ft_printf ---
@@ -143,6 +168,7 @@ Pointer address: 0x7ff7bfeff22c
 This line has 31 characters.
 The previous line printed 31 characters.
 ```
+*Note: The pointer address will vary on your system.*
 
 ## License
 
