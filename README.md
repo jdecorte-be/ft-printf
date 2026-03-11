@@ -61,49 +61,90 @@
 </p>
 </header>
 
-Recoding the libc’s printf function!
+![ft_printf banner](.assets/banner.png)
 
-##### Status
- - Mandatory part Finished 100%
- 
-### Some examples
-```C
+A custom implementation of the C standard library's `printf` function. This project is part of the 42 school curriculum and aims to replicate the original `printf` behavior, including handling various format specifiers, flags, and arguments.
+
+## Features
+
+-   **Handles standard format specifiers**: `c`, `s`, `p`, `d`, `i`, `u`, `x`, `X`, and `%%`.
+-   **Implements bonus flags**: `-` (left-justify), `0` (zero-padding), `.` (precision), and `#` (alternate form for `x`/`X`).
+-   **Supports field width**: Controls the minimum number of characters printed, including dynamic width using `*`.
+
+## Getting Started
+
+### Prerequisites
+
+-   A C compiler (e.g., `gcc` or `clang`)
+-   `make` utility
+
+### Installation & Compilation
+
+1.  **Clone the repository:**
+    ```sh
+    git clone https://github.com/jdecorte-be/ft-printf.git
+    cd ft-printf
+    ```
+
+2.  **Compile the library:**
+    Run `make` to compile the source files and create the static library `libftprintf.a`.
+    ```sh
+    make
+    ```
+
+## Usage
+
+To use `ft_printf` in your own project:
+
+1.  Include the header file `ft_printf.h` in your C source files.
+2.  Compile your project and link it with the `libftprintf.a` library.
+
+### Example
+
+Here is a simple `main.c` file demonstrating the function's usage:
+
+```c
+#include "includes/ft_printf.h"
+
 int main(void)
 {
-    ft_printf("26----------------------\n");
-    printf("%d\n",    printf("   printf |%-8.6d|%-8.6d|\n", 1025, -1025));
-    printf("%d\n", ft_printf("ft_printf |%-8.6d|%-8.6d|\n", 1025, -1025));
-    ft_printf("26----------------------\n");
-    printf("%d\n",    printf("   printf |%-15.8d|\n", 15));
-    printf("%d\n", ft_printf("ft_printf |%-15.8d|\n", 15));
-    ft_printf("26----------------------\n");
-    printf("%d\n",    printf("|%-20.8d|\n", 15));
-    printf("%d\n", ft_printf("|%-20.8d|\n", 15));
-    ft_printf ("111-----------------------------------\n");
-    printf("%d\n",    printf("   printf |%0*d|%0*d|\n",  -3, 10012, -3, -10012));
-    printf("%d\n", ft_printf("ft_printf |%0*d|%0*d|\n",  -3, 10012, -3, -10012));
-    ft_printf ("119-----------------------------------\n");
-    printf("%d\n",    printf("   printf |%-*d|%-*d|\n",  5, 10012, 5, -10012));
-    printf("%d\n", ft_printf("ft_printf |%-*d|%-*d|\n",  5, 10012, 5, -10012));
+    char *str = "world";
+    int   num = 42;
+    int   char_count;
+
+    ft_printf("--- Testing ft_printf ---\n");
+    ft_printf("Hello, %s!\n", str);
+    ft_printf("The answer is %d.\n", num);
+    ft_printf("Hexadecimal for %d is %#x.\n", num, num);
+    ft_printf("Pointer address: %p\n", &num);
+
+    char_count = ft_printf("This line has %d characters.\n", 31);
+    ft_printf("The previous line printed %d characters.\n", char_count);
+
     return (0);
 }
 ```
-### Output:
-```Shell
-./a.out 
-26------------------------------------
-   printf |001025  |-001025 | 30
-ft_printf |001025  |-001025 | 30
-26------------------------------------
-   printf |00000015       | 28
-ft_printf |00000015       | 28
-26------------------------------------
-|00000015            | 23
-|00000015            | 23
-111-----------------------------------
-   printf |10012|-10012| 25
-ft_printf |10012|-10012| 25
-119-----------------------------------
-   printf |10012|-10012| 25
-ft_printf |10012|-10012| 25
+
+**Compile and run the example:**
+
+```sh
+# First, ensure libftprintf.a has been created with `make`
+gcc main.c libftprintf.a -o example
+./example
 ```
+
+**Expected Output:**
+
+```
+--- Testing ft_printf ---
+Hello, world!
+The answer is 42.
+Hexadecimal for 42 is 0x2a.
+Pointer address: 0x7ff7bfeff22c
+This line has 31 characters.
+The previous line printed 31 characters.
+```
+
+## License
+
+This project is licensed under the terms specified in the `LICENSE` file.
