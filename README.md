@@ -61,7 +61,6 @@
 </p>
 </header>
 
-![ft_printf banner](.assets/banner.png)
 
 A custom implementation of the C standard library's `printf` function. This project is part of the 42 school curriculum and aims to replicate the original `printf` behavior, including handling various format specifiers, flags, and arguments.
 
